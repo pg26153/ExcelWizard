@@ -61,11 +61,13 @@ Function Descriptions :
 
 5. generate_excel_with_practice_data() : Generates an Excel file with practice data based on user input and optionally converts it to CSV.
 
-6. generate_excel() : Generates an Excel file based on user input for data entry. Supports default values and manual input.
+6. check_and_prompt_file_overwrite(filename): Checks if a file exists and prompts the user if they want to overwrite it.
 
-7. modify_excel() : Modifies an existing Excel or CSV file by adding or deleting columns and rows. Handles user inputs for changes.
+7. generate_excel() : Generates an Excel file based on user input for data entry. Supports default values and manual input.
 
-8. compare_and_update_excel() : Compares two files and updates the first file based on the second file. Handles unmatched rows with options to delete or replace with 'NA'.
+8. modify_excel() : Modifies an existing Excel or CSV file by adding or deleting columns and rows. Handles user inputs for changes.
+
+9. compare_and_update_excel() : Compares two files and updates the first file based on the second file. Handles unmatched rows with options to delete or replace with 'NA'.
 
 Notes :
 

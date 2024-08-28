@@ -56,6 +56,16 @@ def validate_name(name):
 
     return True
 
+def check_and_prompt_file_overwrite(filename):
+    """
+    Check if the file exists and prompt the user if they want to overwrite it.
+    Returns True if the file should be overwritten, False otherwise.
+    """
+    if os.path.exists(filename):
+        overwrite = input(f"The file '{filename}' already exists. Do you want to overwrite it? (yes/no): ").strip().lower()
+        return overwrite == 'yes'
+    return True
+
 def convert_to_excel(input_filename, output_filename):
     """Convert a CSV file to Excel format."""
     try:
@@ -118,10 +128,13 @@ def check_data_integrity(original_file, converted_file):
 
 def generate_excel_with_practice_data():
     """Generate an Excel file with practice data based on user inputs."""
-    filename = input("Enter the name of the Excel file to generate (e.g., 'data.xlsx') ( Note : Only can generate xlsx file.if you want to convert it to csv file, an option will be provided at the later stage): ")
+    filename = input("Enter the name of the Excel file to generate (e.g., 'data.xlsx') ( Note : Only can generate xlsx file. if you want to convert it to csv file, an option will be provided at the later stage): ")
     if not validate_name(filename):
         return
-
+    
+    if check_and_prompt_file_overwrite(filename):
+        return
+    
     try:
         num_rows = int(input("Enter the number of rows: "))
         num_cols = int(input("Enter the number of columns: "))
@@ -133,12 +146,21 @@ def generate_excel_with_practice_data():
         print("Number of rows and columns must be positive integers.")
         return
 
+    # Ensure filename ends with .xlsx
+    if not filename.lower().endswith('.xlsx'):
+        print("Error: The file extension should be '.xlsx'.")
+        return
     data = {f'Column{i+1}': [f'SampleData_{i+1}_{j+1}' for j in range(num_rows)] for i in range(num_cols)}
     df = pd.DataFrame(data)
 
-    print("Generating excel file..")
-    df.to_excel(filename, index=False)
-    print(f"Excel file '{os.path.abspath(filename)}' with practice data generated successfully.")
+
+    try:
+        print("Generating Excel file...")
+        df.to_excel(filename, index=False)
+        print(f"Excel file '{os.path.abspath(filename)}' generated successfully.")
+    except Exception as e:
+        print(f"An error occurred while generating the Excel file: {e}")
+        return
 
     # Ask user if they want a CSV version
     convert_to_csv = input("Do you want to convert the Excel file to CSV format? (yes/no): ").strip().lower()
@@ -150,11 +172,13 @@ def generate_excel_with_practice_data():
     else:
         print("CSV conversion skipped.")
 
-
 def generate_excel():
     """Generate an Excel file based on user inputs."""
-    filename = input("Enter the name of the Excel file to generate (e.g., 'data.xlsx'): ")
+    filename = input("Enter the name of the Excel file to generate (e.g., 'data.xlsx') ( Note : Only can generate xlsx file. if you want to convert it to csv file, an option will be provided at the later stage): ")
     if not validate_name(filename):
+        return
+    
+    if check_and_prompt_file_overwrite(filename):
         return
 
     try:
@@ -167,8 +191,19 @@ def generate_excel():
     if num_rows <= 0 or num_cols <= 0:
         print("Number of rows and columns must be positive integers.")
         return
+    
+    # Ensure filename ends with .xlsx
+    if not filename.lower().endswith('.xlsx'):
+        print("Error: The file extension should be '.xlsx'.")
+        return
 
-    df = pd.DataFrame(index=range(num_rows), columns=[f'Column{i+1}' for i in range(num_cols)])
+    # Initialize an empty DataFrame with user-defined column names
+    column_names = []
+    for i in range(num_cols):
+        col_name = input(f"Enter name for column {i + 1}: ").strip()
+        column_names.append(col_name)
+
+    df = pd.DataFrame(index=range(num_rows), columns=column_names)
     
     default_value = pd.NA
 
@@ -178,8 +213,25 @@ def generate_excel():
             user_input = input(f"Enter value for {col} (row {i+1}) or press Enter to use default value: ").strip()
             df.at[i, col] = user_input if user_input else default_value
 
-    df.to_excel(filename, index=False)
-    print(f"Excel file '{os.path.abspath(filename)}' generated successfully.")
+
+    try:
+        print("Generating Excel file...")
+        df.to_excel(filename, index=False)
+        print(f"Excel file '{os.path.abspath(filename)}' generated successfully.")
+    except Exception as e:
+        print(f"An error occurred while generating the Excel file: {e}")
+        return
+
+
+    # Ask user if they want a CSV version
+    convert_to_csv = input("Do you want to convert the Excel file to CSV format? (yes/no): ").strip().lower()
+    if convert_to_csv in {'yes', 'y'}:
+        csv_filename = filename.rsplit('.', 1)[0] + '.csv'
+        convert_from_excel(filename, csv_filename)
+        print(f'Removing {os.path.abspath(filename)} excel file')
+        os.remove(filename)
+    else:
+        print("CSV conversion skipped.")
 
 def modify_excel():
     """Modify an existing file (CSV or Excel) based on user inputs."""
@@ -360,7 +412,6 @@ def compare_and_update_excel():
     if file2 == temp_file2_excel and os.path.exists(temp_file2_excel):
         os.remove(temp_file2_excel)
         print(f"Temporary file '{os.path.abspath(temp_file2_excel)}' removed.")
-
 
 def main():
     choice = input("What do you want to do?\n1. Generate a new Excel file with practice data\n2. Generate a new Excel file with user input\n3. Modify an existing Excel file\n4. Compare two Excel files and update the first one\nEnter 1, 2, 3, or 4: ")
