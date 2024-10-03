@@ -1,3 +1,5 @@
+#common_code_gui.py
+
 import pandas as pd
 import os
 from tkinter import filedialog, messagebox, simpledialog, Toplevel
@@ -129,14 +131,22 @@ def open_file_dialog(title):
     
     return file_path,""
 
-def save_file_dialog(title):
+def save_file_dialog(title, file_type=None):
     """Open a save file dialog to select where to save the file."""
+
+    #ternary operator
+    filetypes = (
+        [("Excel Files", "*.xlsx"), ("Excel Files", "*.xls")] if file_type == "excel" 
+        else [("CSV Files", "*.csv")] if file_type == "csv" 
+        else []
+    )
+
     file_path = filedialog.asksaveasfilename(
         title=title,
         initialdir=os.getcwd(),
         initialfile="File1.xlsx",
         defaultextension=".xlsx",
-        filetypes=[("Excel Files", "*.xlsx"), ("CSV Files", "*.csv")]
+        filetypes=filetypes
     )
     
     if not file_path:

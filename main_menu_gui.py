@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter import simpledialog, messagebox
 import common_code_gui as common
 from compare_update_gui import compare_and_update
+from file_format_conv_gui import file_format_conversion_ops
 import logging
 from datetime import datetime
 import os
@@ -67,14 +68,7 @@ def file_search():
 # Function for "File Format Conversion"
 def file_format_conversion():
     try:
-        input_file = common.open_file_dialog("Select Excel or CSV File to Convert")
-        if input_file:
-            output_format = simpledialog.askstring("Input", "Enter the format to convert to (CSV, JSON, PDF):")
-            if output_format and output_format.upper() in ["CSV", "JSON", "PDF"]:
-                # Placeholder: Add conversion logic here
-                common.display_message(f"File converted to {output_format}.", status="success")
-            else:
-                common.display_message("Invalid format choice.", status="fail")
+        file_format_conversion_ops()
     except Exception as e:
         common.handle_exception(e)
 
