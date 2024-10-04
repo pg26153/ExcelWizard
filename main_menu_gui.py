@@ -5,6 +5,8 @@ from tkinter import simpledialog, messagebox
 import common_code_gui as common
 from compare_update_gui import compare_and_update
 from file_format_conv_gui import file_format_conversion_ops
+from file_search_gui import search_file
+from sample_file_gen_gui import generate_dummy_data,save_to_file
 import logging
 from datetime import datetime
 import os
@@ -58,10 +60,12 @@ def file_compare_update():
 # Function for "File Search"
 def file_search():
     try:
-        filename = simpledialog.askstring("Input", "Enter the filename to search:")
+        filename = common.simple_input_dialog("Input", "Enter the filename to search for (with extension):")
         if filename:
-            # Placeholder: Add file search logic here
-            common.display_message(f"Search complete. File '{filename}' found.", status="info")
+            search_file(filename)  # Call the search function from the search module
+        else:
+            raise ValueError("Filename cannot be empty.")
+
     except Exception as e:
         common.handle_exception(e)
 
@@ -74,14 +78,23 @@ def file_format_conversion():
 
 # Function for "Sample File Generation"
 def sample_file_generation():
+    """Main function to execute the dummy data generation process."""
     try:
-        num_columns = simpledialog.askinteger("Input", "Enter number of columns:")
-        num_rows = simpledialog.askinteger("Input", "Enter number of rows:")
-        if num_columns and num_rows:
-            output_file = common.save_file_dialog("Save Sample File As")
-            if output_file:
-                # Placeholder: Add sample file generation logic here
-                common.display_message(f"Sample file with {num_columns} columns and {num_rows} rows generated and saved as {output_file}", status="success")
+        num_columns = int(common.simple_input_dialog("Input", "Enter the number of columns:"))
+        num_rows = int(common.simple_input_dialog("Input", "Enter the number of rows:"))
+        column_info = {}
+
+        for i in range(num_columns):
+            column_name = common.simple_input_dialog("Input", f"Enter the name for Column {i + 1}:")
+            data_type = common.simple_input_dialog(f"Input", f"Enter the data type for '{column_name}' (Name, Age, Email, Text, or Other):")
+            column_info[column_name] = data_type
+
+        # Generate dummy data
+        dummy_data_df = generate_dummy_data(num_rows, column_info)
+
+        # Save the generated data to a file
+        save_to_file(dummy_data_df)
+
     except Exception as e:
         common.handle_exception(e)
 
