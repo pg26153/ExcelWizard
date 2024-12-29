@@ -2,7 +2,7 @@
 
 import pandas as pd
 import os
-from tkinter import filedialog, messagebox, simpledialog, Toplevel
+from tkinter import filedialog, Toplevel
 import tkinter as tk
 from main_menu_gui import logging
 import tkinter.font as tkFont
@@ -105,7 +105,6 @@ def save_merged_file(merged_df, output_file_path):
 
 def validate_filename(file_path, status=""):
     """Validates the filename for various criteria."""
-
     # Check for spaces and valid extensions regardless of status
     if ' ' in os.path.basename(file_path):
         return False, "Filename should not contain spaces."
@@ -136,9 +135,7 @@ def save_file_dialog(title, file_type=None):
 
     #ternary operator
     filetypes = (
-        [("Excel Files", "*.xlsx"), ("Excel Files", "*.xls")] if file_type == "excel" 
-        else [("CSV Files", "*.csv")] if file_type == "csv" 
-        else []
+        [("xlsx", "*.xlsx"), ("Xls", "*.xls"),("Csv", "*.csv")]
     )
 
     file_path = filedialog.asksaveasfilename(
@@ -148,7 +145,7 @@ def save_file_dialog(title, file_type=None):
         defaultextension=".xlsx",
         filetypes=filetypes
     )
-    
+
     if not file_path:
         return False, "No file provided"
     
@@ -208,6 +205,9 @@ def simple_input_dialog(title, prompt):
     # Add an OK button with styling
     ok_button = tk.Button(frame, text="OK", command=on_ok, font=("Helvetica", 12), bg="#4CAF50", fg="white", bd=0, padx=10, pady=5)
     ok_button.pack()
+
+     # Bind the Enter key to trigger the OK button click
+    dialog.bind('<Return>', lambda event: on_ok())  # This binds the Enter key to the on_ok function
 
     # Center the dialog and set it to always be on top
     dialog.transient()  # Make the window a "transient" window for the parent

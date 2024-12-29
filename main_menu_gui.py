@@ -1,7 +1,7 @@
 #main_menu_gui.py
 
 import tkinter as tk
-from tkinter import simpledialog, messagebox
+from tkinter import messagebox
 import common_code_gui as common
 from compare_update_gui import compare_and_update
 from file_format_conv_gui import file_format_conversion_ops
@@ -38,7 +38,7 @@ def file_compare_update():
         if not file2:
             raise ValueError(message2)
         
-        key_column = common.simple_input_dialog("Input", "Enter the key column name:")
+        key_column = common.simple_input_dialog("Input", "Enter the key column name: ( Please enter exact name )")
         if not key_column:
             raise ValueError("No key column provided")
 
@@ -46,7 +46,7 @@ def file_compare_update():
             raise ValueError("Cannot select Same file again")
         
         # Ask user for confirmation to update the first file
-        if messagebox.askyesno("Confirmation", f"Do you want to update '{file1}' with changes from '{file2}'?"):
+        if messagebox.askyesno("Confirmation", f"Do you want to update '{os.path.basename(file1)}' with changes from '{os.path.basename(file2)}'?"):
             output_file, message3 = common.save_file_dialog("Save Updated File As")
             if not output_file:
                 raise ValueError(message3)
