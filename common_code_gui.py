@@ -130,12 +130,11 @@ def open_file_dialog(title):
     
     return file_path,""
 
-def save_file_dialog(title, file_type=None):
+def save_file_dialog(title):
     """Open a save file dialog to select where to save the file."""
 
-    #ternary operator
     filetypes = (
-        [("xlsx", "*.xlsx"), ("Xls", "*.xls"),("Csv", "*.csv")]
+        [("xlsx", "*.xlsx"),("Csv", "*.csv")]
     )
 
     file_path = filedialog.asksaveasfilename(
