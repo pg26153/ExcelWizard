@@ -86,7 +86,7 @@ def sample_file_generation():
 
         for i in range(num_columns):
             column_name = common.simple_input_dialog("Input", f"Enter the name for Column {i + 1}:")
-            data_type = common.simple_input_dialog(f"Input", f"Enter the data type for '{column_name}' (Name, Age, Email, Text, or Other):")
+            data_type = common.simple_input_dialog(f"Input", f"Enter the data type for '{column_name}' (Int, Varchar, Numeric, string or Other):")
             column_info[column_name] = data_type
 
         # Generate dummy data
