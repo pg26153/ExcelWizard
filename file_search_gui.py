@@ -6,6 +6,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from tkinter import Toplevel, Label
 import time
 import threading
+from queue import Queue
 
 def search_file_in_directory(filename, search_path):
     """Search for a file in a given directory."""
@@ -49,7 +50,8 @@ def file_search_in_drives(filename,label):
                 raise ValueError(f"Error searching in drive: {futures[future]} - {str(e)}")
             finally:
                 # Update the label with completion message for the specific drive
-                label.config(text=f"Completed search in: {drive}")  # Update user feedback                
+                common.log_message(f"Completed search in: {drive}")
+                #label.config(text=f"Completed search in: {drive}")  # Update user feedback                
 
     return found_files
 
@@ -92,6 +94,7 @@ def search_file(filename):
     """Main function to initiate the search and display results."""
     loading_window = None
     stop_event = threading.Event()
+    exception_queue = Queue()
 
     def complete_search(found_files):
         """Handle the completion of the search."""
@@ -104,9 +107,9 @@ def search_file(filename):
                 common.log_message(f"Found files:\n" + "\n".join(found_files))
                 common.display_message("Found files:\n" + "\n".join(found_files), status="info")
             else:
-                raise ValueError("No files found.")
+                raise ValueError("Search failed: No files found.")
         except Exception as e:
-            raise e
+            common.handle_exception(e)
         
     try:
         common.log_message(f"Starting search for file: {filename}")
@@ -115,19 +118,25 @@ def search_file(filename):
         loading_window.update()  # Update the loading screen immediately
 
         # Start the loading animation in a separate thread
-        animation_thread = threading.Thread(target=loading_animation, args=(label, stop_event))
+        animation_thread = threading.Thread(target=loading_animation, args=(label, stop_event),)
         animation_thread.start()
 
         # Perform the file search in a separate thread
-        def run_file_search():
+        def run_file_search(exception_queue):
             try:
                 found_files = file_search_in_drives(filename, label)  # Pass label for user feedback
                 complete_search(found_files)
             except Exception as e:
-                raise e
+                exception_queue.put(e)  # Put the exception in the queue to be handled in the main thread
 
-        search_thread = threading.Thread(target=run_file_search)
+
+        search_thread = threading.Thread(target=run_file_search, args=(exception_queue,))  # Correct argument packing
         search_thread.start()
+
+
+        if not exception_queue.empty():  # If an exception occurred during the search
+            exception = exception_queue.get()
+            raise exception
 
     except Exception as e:
         if loading_window:  # Close loading screen if it exists
