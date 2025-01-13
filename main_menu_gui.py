@@ -113,6 +113,14 @@ def main_menu():
     y = (screen_height // 2) - (window_height // 2)
     root.geometry(f"{window_width}x{window_height}+{x}+{y}")
 
+    # Create a frame for the heading
+    heading_frame = tk.Frame(root)
+    heading_frame.pack(pady=10)
+
+    # Add the heading label with red color and bold font
+    heading_label = tk.Label(heading_frame, text="Excel Operations Tool", font=("Arial", 16, "bold"), fg="red")
+    heading_label.pack()
+    
     # Create a frame for buttons
     frame = tk.Frame(root)
     frame.pack(expand=True)
