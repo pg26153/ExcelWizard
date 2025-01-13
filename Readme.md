@@ -1,142 +1,173 @@
-**File Operations Tool**
+# File Operations Tool
 
-This project provides a suite of tools for manipulating and managing data in CSV and Excel files, allowing for tasks like searching, comparing, updating, and format conversion. The tools come with a user-friendly graphical user interface (GUI) built using Tkinter for easy interaction.
-Features
+Welcome to the **File Operations Tool**—a comprehensive suite designed to streamline your file management tasks. Whether you need to search, compare, update, convert formats, or generate new files, this tool empowers you to perform these actions efficiently with a user-friendly graphical interface built using Tkinter.
 
-**File Search (file_search_gui.py)**
+## 🚀 Features
 
--> Micro-Threading Search: The tool uses a micro-threading concept to speed up the search process. This allows for faster file searches compared to traditional computer search methods. Multiple threads are run simultaneously, reducing the overall time it takes to find a file across all available drives.
+### 🔍 **File Search (file_search_gui.py)**
 
--> Search Across Multiple Drives: Enables searching for a file across all accessible drives, ensuring that no files are missed.
+- **Supercharged Search**: Leverage micro-threading to boost search speed. This advanced concept runs multiple search threads simultaneously, drastically reducing search time across drives.
+  
+- **Search Across All Drives**: Seamlessly search for files across multiple accessible drives, ensuring nothing gets left behind.
+  
+- **Visual Progress**: Track your search with an intuitive progress bar and live-loading animation, keeping you informed every step of the way.
 
--> Progress Bar & Loading Animation: Displays a progress bar to visualize the search process, making it easier for users to track the progress.
+### 🔄 **File Comparison & Update (compare_update_gui.py)**
 
-**File Comparison & Update (compare_update_gui.py)**
+- **Automated Comparison**: Let the tool automatically compare two files based on a selected key column—no need to manually inspect each row or column.
+  
+- **Error-Free Updates**: Forget human errors when updating files. The program ensures all discrepancies are handled, guaranteeing accurate and flawless updates.
 
--> Automated Comparison: The tool automatically compares two files based on a chosen key column, saving time and effort. There's no need to manually compare rows and columns— the program handles all of it.
+- **Smooth Handling of Data**: The tool adapts to extra columns, new data, and missing rows, making updates straightforward and hassle-free.
 
--> No Human Error: The program eliminates human error by ensuring the files are updated automatically. You no longer need to worry about incorrectly updating values or missing rows and columns.
+### 🔄 **File Format Conversion (file_format_conv_gui.py)**
 
--> High Satisfaction Rate: With built-in logic for handling extra columns, new columns, missing rows, and more, the program ensures a smooth and accurate update process with minimal intervention required.
+- **Seamless Format Conversion**: Convert between CSV and Excel effortlessly, while ensuring that your data remains intact and properly formatted.
+  
+- **Data Integrity Assurance**: Before and after conversion, a hash comparison is performed to ensure that no data is lost or modified during the process.
 
-**File Format Conversion (file_format_conv_gui.py)**
+- **Easy-to-Use**: The conversion is simple and quick, so you can focus on the data, not the technical details.
 
--> Seamless File Format Conversion: Easily convert between CSV and Excel file formats. This tool ensures that data is correctly transferred and formatted when changing between the two formats.
+### 📝 **File Generation (common_code_gui.py)**
 
--> Data Integrity Check: Before and after conversion, the tool checks for data integrity using hash comparisons, ensuring that no data is lost or changed during the process.
+- **Effortless File Creation**: Quickly generate new files by merging or updating data, or even create entirely new datasets based on provided inputs.
 
--> Flexible and User-Friendly: Allows you to convert files quickly and easily while providing peace of mind that the data is intact.
+- **Eliminate Manual Errors**: Let the tool handle formatting, creation, and structuring of files, ensuring no mistakes in the process.
 
-**File Generation (common_code_gui.py)**
+- **Custom Save Locations**: Choose where and in what format (CSV or Excel) to save your files, giving you complete flexibility over your workflow.
 
--> Simple File Generation: The tool allows users to generate new files based on the data provided. Whether you’re merging data, updating files, or simply creating new ones, the tool makes the process easy and efficient.
+---
 
--> Prevents Manual Errors: The tool handles the creation and formatting of files without requiring manual intervention, ensuring that no formatting errors or inconsistencies occur.
+## 🧑‍💻 **How to Use**
 
-->Save to Desired Location and Format: Users can choose to save files in their preferred format (CSV or Excel) and location, providing flexibility and convenience in managing files.
+### 1. **File Search Tool**
 
+1. **Step 1**: Select the *"File Search"* option from the main menu.
+2. **Step 2**: Enter the name of the file you’re looking for.
+3. **Step 3**: The tool will search across all accessible drives using micro-threading for lightning-fast results.
+4. **Step 4**: Track progress with the progress bar, and view the results when the search is completed.
 
-**How to Use**
+---
 
-1. File Search Tool
-   
-    •	Step 1: Select the "File Search" option from the main menu.
+### 2. **File Comparison and Update Tool**
 
-    •	Step 2: Enter the name of the file you want to search for.
+1. **Step 1**: Choose the *"File Comparison & Update"* option from the main menu.
+2. **Step 2**: Select the two files (File 1 and File 2) you wish to compare.
+3. **Step 3**: Pick a key column for comparison.
+4. **Step 4**: The tool will:
+   - Compare rows based on the key column.
+   - Handle extra columns, missing data, and new columns automatically.
+   - Prompt you to either add missing rows or set them to *NA* in File 1.
+5. **Step 5**: Save the updated file to your desired location.
 
-    •	Step 3: The tool will search for the file on all accessible drives using micro-threading to speed up the search process.
+---
 
-    •	Step 4: A progress bar will be displayed, and the results will be shown once the search is complete.
-________________________________________
-2. File Comparison and Update Tool
+### 3. **File Format Conversion Tool**
 
-    •	Step 1: Select the "File Comparison & Update" option from the main menu.
+1. **Step 1**: Click on the *"File Format Conversion"* option from the main menu.
+2. **Step 2**: Select the file you want to convert (either CSV or Excel).
+3. **Step 3**: Choose your desired output format (CSV or Excel).
+4. **Step 4**: The tool will:
+   - Convert the file to the chosen format.
+   - Ensure data integrity through hash comparisons.
+   - Raise an error if any integrity issues are found.
+5. **Step 5**: Save the converted file to your desired location.
 
-    •	Step 2: Select two files (File 1 and File 2) to compare.
+---
 
-    •	Step 3: Choose the key column to perform the comparison.
+### 4. **File Generation Tool**
 
-    •	Step 4: The tool will:
+1. **Step 1**: Select the *"File Generation"* option from the main menu.
+2. **Step 2**: Provide the data you want to merge or use to create a new file.
+3. **Step 3**: The tool will automatically create the new file, handling all formatting and structure.
+4. **Step 4**: Choose where and in which format (CSV or Excel) to save the new file.
 
-   o	Compare the rows based on the key column.
+---
 
-   o	Automatically handle extra columns, new columns, and missing rows.
+## 🌟 **Benefits**
 
-   o	Prompt you to add new rows or set missing rows to NA in File 1.
+### **File Search**
 
-   •	Step 5: Save the updated file to your desired location.
-________________________________________
-3. File Format Conversion Tool
+- **Fast and Efficient**: Powered by micro-threading, this tool outperforms traditional search methods, helping you find files across multiple drives faster than ever before.
+  
+- **No Manual Searching**: Say goodbye to manually hunting down files—let the tool do the heavy lifting for you.
 
-   •	Step 1: Select the "File Format Conversion" option from the main menu.
+- **Real-Time Feedback**: A progress bar keeps you informed of the search’s status.
 
-   •	Step 2: Choose the file you want to convert (CSV or Excel).
+---
 
-   •	Step 3: Select the desired output file format (CSV or Excel).
+### **File Comparison & Update**
 
-   •	Step 4: The tool will:
+- **Automation at its Best**: No need for manual comparisons. The tool automatically detects discrepancies and updates files based on a key column.
+  
+- **Reduced Human Error**: Automation minimizes the chances of errors, ensuring accurate updates every time.
 
-   o    Convert the file to the specified format.
+- **Seamless Updates**: Handles new data, extra columns, and missing rows with ease, making the update process smoother.
 
-   o	Ensure data integrity through hash comparison.
+---
 
-   o	Delete the converted file and raise an error if data integrity fails.
+### **File Format Conversion**
 
-    •	Step 5: The converted file will be saved to your desired location.
-________________________________________
-4. File Search Tool
+- **Hassle-Free Conversion**: Easily convert files between CSV and Excel formats without worrying about data loss or misalignment.
 
-    •	Step 1: Select the "File Search" option from the main menu.
+- **Guaranteed Data Integrity**: Ensure that the integrity of your data is preserved before and after conversion with hash comparisons.
 
-    •	Step 2: Enter the keyword or phrase you want to search within the file.
+- **Quick & Easy**: Simple steps to convert your files with peace of mind.
 
-    •	Step 3: The tool will:
+---
 
-   o	Perform a fast search using a micro-threading approach, which speeds up the process compared to regular computer search algorithms.
+### **File Generation**
 
-   o	Display search results with matched keywords and file locations.
+- **No More Manual Work**: Let the tool generate new files for you—whether merging data, updating existing files, or creating brand new ones.
 
-    •	Step 4: You can select the result to view the content containing the search keyword.
+- **Save Where You Want**: Choose your preferred format (CSV or Excel) and the location to save the generated files.
 
-**Benefits**
+- **No Errors**: Automatic handling ensures the file is generated without any formatting or structural issues.
 
-**File Search**
-    
-•	Fast and Efficient: With the use of micro-threading, file searches are faster than traditional methods, allowing users to find files on multiple drives more efficiently.
-    
-•	No Manual Searching: You no longer need to manually search each drive for your file. The program handles the entire process.
-    
-•	Visual Progress: The progress bar and loading animation make it easier to track search progress in real-time.
-File Comparison & Update
-    
-•	Automation: Automatically compare files and update them based on a key column— no manual comparison required.
-    
-•	Minimizes Errors: By automating the process, the risk of human error in the update process is greatly reduced.
-    
-•	High Satisfaction Rate: The program ensures that the comparison and update process is accurate and streamlined, ensuring a high satisfaction rate for users.
+---
 
-**File Format Conversion**
+## 🚀 **Getting Started**
 
-•   Seamless Conversion: Easily convert between CSV and Excel formats without worrying about data loss or formatting issues.
-    
-•	Data Integrity Check: Ensure that the converted file retains the same data as the original by checking for data integrity using hash comparisons.
-    
-•	Easy to Use: The conversion process is simple and quick, allowing you to focus on the content rather than the technical details.
-File Generation
-    
-•	Automatic File Creation: The tool helps generate new files based on your operations (such as merging or updating data).
-    
-•	Custom Save Options: Choose where to save files and in what format, providing flexibility for your workflow.
-    
-•	Prevent Manual Errors: Automatic file creation reduces the risk of formatting errors that could arise from manual processes.
+Follow these steps to run the project on your local machine:
 
-**Contribution**
+### 1. **Clone the Repository**
 
-Feel free to fork the repository, report issues, or submit pull requests. Contributions are always welcome! When contributing, please ensure:
+First, clone the repository to your local machine by running:
 
-•	New features are thoroughly tested.
+Git clone [https://github.com/yourusername/file-operations-tool.git](https://github.com/pg26153/ExcelWizard/tree/main)
 
-•	Any changes to the codebase are documented.
+### 2. **Create a Virtual Environment**
 
-•	A description of the problem and solution is provided in your pull request.
+```bash
+python -m venv venv
+```
+### 3. **Activate the Virtual Environment**
 
+Once the virtual environment is created, activate it:
+
+```bash
+.\venv\Scripts\activate
+```
+### 4. **Install the Dependencies**
+
+Next, install the required dependencies from the `requirements.txt` file:
+
+```bash
+pip install -r requirements.txt
+```
+### 5. **Run the Application**
+
+Once everything is set up, you can run the application:
+
+```bash
+python main.py
+```
+### 🤝 **Contribution**
+
+We welcome contributions from the community! Feel free to fork the repository, submit issues, or create pull requests. When contributing, please ensure:
+
+- **Thorough Testing**: New features should be fully tested before submission.
+- **Documentation**: Any code changes should be accompanied by clear documentation.
+- **Clear Descriptions**: Provide a detailed explanation of the problem being solved and how your contribution addresses it.
+
+Together, we can make this tool even better! Happy coding! 🚀
