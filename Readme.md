@@ -136,7 +136,7 @@ Follow these steps to run the project on your local machine:
 
 First, clone the repository to your local machine by running:
 
-Git clone [https://github.com/yourusername/file-operations-tool.git](https://github.com/pg26153/ExcelWizard/tree/main)
+Git clone https://github.com/pg26153/ExcelWizard/tree/main
 
 ### 2. **Create a Virtual Environment**
 
@@ -162,7 +162,7 @@ pip install -r requirements.txt
 Once everything is set up, you can run the application:
 
 ```bash
-python main.py
+python main_menu_gui.py
 ```
 ### 🤝 **Contribution**
 
