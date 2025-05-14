@@ -4,7 +4,7 @@ import pandas as pd
 import os
 from tkinter import filedialog, Toplevel
 import tkinter as tk
-from main_menu_gui import logging
+from main_menu_gui imporsat logging
 import tkinter.font as tkFont
 
 def log_message(message, level='info'):
